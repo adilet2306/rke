@@ -72,6 +72,9 @@ sed -i "s/WORKER1_IP/$worker1_ip/" cluster.yml
 sed -i "s/WORKER2_IP/$worker2_ip/" cluster.yml
 }
 modify_cluster_file
+sleep 2
+
 rke up
+
 mkdir ~/kube
-mv kube_config_cluster.yml .kube/config 
+mv kube_config_cluster.yml .kube/config
