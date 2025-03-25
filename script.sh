@@ -46,7 +46,7 @@ sudo apt-get install -y kubectl
 
 }
 
-function rke() {
+function install_rke() {
 	wget https://github.com/rancher/rke/releases/download/v1.8.0/rke_linux-amd64
 	chmod +x rke_linux-amd64
 	sudo mv rke_linux-amd64 /usr/local/bin/rke
@@ -63,7 +63,7 @@ done
 
 docker
 kubectl
-rke
+install_rke
 prepare_vms
 function modify_cluster_file() {
 cp cluster.yml.template cluster.yml
@@ -71,10 +71,9 @@ sed -i "s/MASTER_IP/$master_ip/" cluster.yml
 sed -i "s/WORKER1_IP/$worker1_ip/" cluster.yml
 sed -i "s/WORKER2_IP/$worker2_ip/" cluster.yml
 }
+
 modify_cluster_file
-sleep 2
 
 rke up
-
-mkdir ~/kube
+mkdir ~/.kube
 mv kube_config_cluster.yml .kube/config
